@@ -1,8 +1,8 @@
-package Ver2;
+
 public class exclude {
 	String tempStr="";
-	boolean isComment = false;//¬O§_¬°µù¸Ñ
-	Object[] arr = {"",false};//¦^¶ÇstrData,isComment
+	boolean isComment = false;//æ˜¯å¦ç‚ºè¨»è§£
+	Object[] arr = {"",false};//å›å‚³strData,isComment
 	
 	Object exclude(String strData,char[] ch,boolean isCom){
 		
@@ -19,7 +19,7 @@ public class exclude {
 					//break L1;
 				}		                					
 			}
-			//µù¸Ñ§À¤Ú³¡¤À
+			//è¨»è§£å°¾å·´éƒ¨åˆ†
 			else if(ch[j]=='*' && ch[j+1]=='/' && isComment==true){
 				if(j<ch.length-2){
 					strData = strData.substring(j+2,ch.length-1);
@@ -29,7 +29,7 @@ public class exclude {
 			else if(isComment ==true){
 				strData="";
 			}
-			//±Æ°£¦r¦ê
+			//æ’é™¤å­—ä¸²
 			else if(ch[j]=='"'){
 				String space = "";
 				int i=j;
@@ -45,7 +45,7 @@ public class exclude {
 				strData = strData.replace(tempStr,space);
 				//System.out.println("StrDataAfter :"+strData);
 			}
-			//±Æ°£¦r¤¸
+			//æ’é™¤å­—å…ƒ
 			else if(ch[j]=='\''){
 				String space = "";
 				int i=j;

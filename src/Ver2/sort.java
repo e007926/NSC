@@ -1,12 +1,12 @@
-package Ver2;
+
 import java.util.ArrayList;
 
 
 public class sort {
 
-	//±NA»PB¤¤ªº¤èªk¦WºÙ°µ¤ñ¹ï¨Ã±N¬Û¦Pªº¤¬´«
+	//å°‡Aèˆ‡Bä¸­çš„æ–¹æ³•åç¨±åšæ¯”å°ä¸¦å°‡ç›¸åŒçš„äº’æ›
 	void swap(ArrayList<Object> nameAll,ArrayList<Double> countAll,ArrayList<String> HighLow,ArrayList<String> nameSubAll){
-		//±NnameAll»PnameSubAll¤¤ªº¤èªk¦WºÙ°µ¤ñ¹ï¨Ã±N¬Û¦Pªº¤¬´«
+		//å°‡nameAllèˆ‡nameSubAllä¸­çš„æ–¹æ³•åç¨±åšæ¯”å°ä¸¦å°‡ç›¸åŒçš„äº’æ›
          double valueall;
 		 String highlow;
 		 String nameall;

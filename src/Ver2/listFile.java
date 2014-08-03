@@ -1,11 +1,11 @@
-package Ver2;
+
 import java.io.File;
 import java.io.FilenameFilter;
 
 public class listFile {
 	
 	String[] listFile(String dirPath){
-		//¦pªG¤å¥ó¤£¥H¤À¹j²Åµ²§À¡A¦Û°Ê¥[¤J¤À¹j²Å
+		//å¦‚æœæ–‡ä»¶ä¸ä»¥åˆ†éš”ç¬¦çµå°¾ï¼Œè‡ªå‹•åŠ å…¥åˆ†éš”ç¬¦
 		if(!dirPath.endsWith(File.separator)){
 			dirPath = dirPath+File.separator;
 		}
@@ -17,7 +17,7 @@ public class listFile {
 			private String filter = ".java";
 			
 			@Override
-			public boolean accept(File dir, String filename) {
+			public boolean accept(File dir, String filename) {    
 			    if(filename.indexOf(filter) != -1)return true;
 			    return false;
 			}};

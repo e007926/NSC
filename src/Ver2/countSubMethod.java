@@ -1,4 +1,4 @@
-package Ver2;
+
 import java.io.FileNotFoundException;
 import java.io.FileReader;	
 import java.io.BufferedReader;		
@@ -20,13 +20,13 @@ import java.util.Stack;
 		String fileName;
 	    private double totalLines = 0;
 	    static String tt="";
-	    ArrayList<String> methodList = new ArrayList<String>(); //¤èªk¦WºÙ
+	    ArrayList<String> methodList = new ArrayList<String>(); //æ–¹æ³•åç¨±
 	    
-	    ArrayList<Integer> methodNumList = new ArrayList<Integer>(); //¦P¦W¤èªk­Ó¼Æ
-	    ArrayList<Integer> methodFirstLineList = new ArrayList<Integer>(); //²Ä¤@¦¸¥X²{ªº¦æ¼Æ
-	    ArrayList<Double> methodLinesList = new ArrayList<Double>(); //¦P¦W¤èªk¥­§¡¦æ¼Æ
-	    ArrayList<Double> countSubMethodList=new ArrayList<Double>();//¤l¤èªk¼Æ
-	    ArrayList<String> subhighlowList =new ArrayList<String>();//¤l¤èªk¼Æ°ª§C
+	    ArrayList<Integer> methodNumList = new ArrayList<Integer>(); //åŒåæ–¹æ³•å€‹æ•¸
+	    ArrayList<Integer> methodFirstLineList = new ArrayList<Integer>(); //ç¬¬ä¸€æ¬¡å‡ºç¾çš„è¡Œæ•¸
+	    ArrayList<Double> methodLinesList = new ArrayList<Double>(); //åŒåæ–¹æ³•å¹³å‡è¡Œæ•¸
+	    ArrayList<Double> countSubMethodList=new ArrayList<Double>();//å­æ–¹æ³•æ•¸
+	    ArrayList<String> subhighlowList =new ArrayList<String>();//å­æ–¹æ³•æ•¸é«˜ä½
 	    public CountSubMethodTest(){
 		}
 	    
@@ -46,7 +46,7 @@ import java.util.Stack;
 	    }
 	    String show_methodName() throws Exception{
 	    	 make_list();
-	    	String str=String.format("%-48s%-2s%-11s%-5s\n","¤èªk¦WºÙ",":","¤l¤èªk¼Æ","¤èªk¼Æ°ª§C");
+	    	String str=String.format("%-48s%-2s%-11s%-5s\n","æ–¹æ³•åç¨±",":","å­æ–¹æ³•æ•¸","æ–¹æ³•æ•¸é«˜ä½");
 	    	for(int i=0;i<methodList.size();i++){
 	    		countSubMethodList.add(Double.parseDouble(start_count(methodList.get(i))));	
 	    	}
@@ -67,7 +67,7 @@ import java.util.Stack;
 	        }
 	        ArrayList<String> tempLines = new ArrayList<String>();
 	        try {
-	        	//boolean isComment = false;//¬O§_¬°µù¸Ñ
+	        	//boolean isComment = false;//æ˜¯å¦ç‚ºè¨»è§£
 	            String strData = inputFile.readLine();
 	            char[] ch = strData.toCharArray();
 	            
@@ -77,13 +77,13 @@ import java.util.Stack;
 		    	
 	            for (int i = 0; i < inputFile.getLineNumber(); i++) {
 	            	
-	            	//±Æ°£µù¸Ñ¦r¦ê¦r¤¸
+	            	//æ’é™¤è¨»è§£å­—ä¸²å­—å…ƒ
 	    			/*rec = (Object[]) exc.excludeTest(strData,ch);
 	    			isComment=(boolean) rec[1];
 	    			strData=(String) rec[0]+"";
 	    			ch=strData.toCharArray();*/
 	            	for (int j = 0; j < ch.length; j++) {
-	            	if (ch[j] == '/') { // ©¿²¤µù¸Ñ
+	            	if (ch[j] == '/') { // å¿½ç•¥è¨»è§£
                         j++;
                         if (ch[j] == '/') {
                             break;
@@ -101,7 +101,7 @@ import java.util.Stack;
                             }
                         }
                     }
-	            	else if (ch[j] == '"') { //©¿²¤¦r¦ê
+	            	else if (ch[j] == '"') { //å¿½ç•¥å­—ä¸²
                         j++;
                         for (; j < ch.length; j++) {
                             if (ch[j] == '"') {
@@ -114,7 +114,7 @@ import java.util.Stack;
                                 }
                             }
                         }
-                    } else if (ch[j] == '\'') { // ©¿²¤¦r¤¸
+                    } else if (ch[j] == '\'') { // å¿½ç•¥å­—å…ƒ
                         j += 2;
                         if (ch[j + 1] == '\'') {
                             j++;
@@ -129,7 +129,7 @@ import java.util.Stack;
 	                      
 	    	    			
 	                        for (int j = 0; j < ch.length; j++) {
-	                        	if (ch[j] == '/') { // ©¿²¤µù¸Ñ
+	                        	if (ch[j] == '/') { // å¿½ç•¥è¨»è§£
 	                                j++;
 	                                if (ch[j] == '/') {
 	                                    break;
@@ -147,7 +147,7 @@ import java.util.Stack;
 	                                    }
 	                                }
 	                            }
-	                        	else if (ch[j] == '"') { //©¿²¤¦r¦ê
+	                        	else if (ch[j] == '"') { //å¿½ç•¥å­—ä¸²
 	                                j++;
 	                                for (; j < ch.length; j++) {
 	                                    if (ch[j] == '"') {
@@ -160,7 +160,7 @@ import java.util.Stack;
 	                                        }
 	                                    }
 	                                }
-	                            } else if (ch[j] == '\'') { // ©¿²¤¦r¤¸
+	                            } else if (ch[j] == '\'') { // å¿½ç•¥å­—å…ƒ
 	                                j += 2;
 	                                if (ch[j + 1] == '\'') {
 	                                    j++;
@@ -220,7 +220,7 @@ import java.util.Stack;
 	            }
 	            inputFile.close();
 	        } catch (IOException IOe) {
-	            System.out.println("¿é¤J¿é¥X¿ù»~");
+	            System.out.println("è¼¸å…¥è¼¸å‡ºéŒ¯èª¤");
 	            System.exit(1);
 	        }
 
@@ -242,7 +242,7 @@ import java.util.Stack;
 	         try {
 	             fileObject = new FileReader(fileName);
 	         } catch (FileNotFoundException fe) {
-	             System.out.println("ÀÉ®× \"" + fileName + "\" ¤£¦s¦b");
+	             System.out.println("æª”æ¡ˆ \"" + fileName + "\" ä¸å­˜åœ¨");
 	             System.exit(1);
 	         }
 
@@ -257,7 +257,7 @@ import java.util.Stack;
 	             L:
 	             for (; i < inputFile.getLineNumber(); i++) {
 	                 if (methodList.contains(m)) {
-	                     //Åª¦r¤¸®É ­n§âÅª¹Lªº¦r¤¸¦s¤J¤@­Ó¦r¤¸°ïÅ|(Stack) ±q²{¦bªº³o¦æ¶}ÀY¶}©l³v¦r¤¸Åª¨ú
+	                     //è®€å­—å…ƒæ™‚ è¦æŠŠè®€éçš„å­—å…ƒå­˜å…¥ä¸€å€‹å­—å…ƒå †ç–Š(Stack) å¾ç¾åœ¨çš„é€™è¡Œé–‹é ­é–‹å§‹é€å­—å…ƒè®€å–
 	                     Stack methContent = new Stack<Character>();
 	                     int j = 0;
 	                     L1:
@@ -278,10 +278,10 @@ import java.util.Stack;
 	                         }
 	                         strData = inputFile.readLine();
 	                     }
-	                     //Åª¨ì²Ä¤@­Ó¥ª¤j¬A¸¹®É ¶}©l§â¸Ó¤èªkªºµ{¦¡½X¤Æ¬°¦r¤¸©ñ¶iStack
-	                     //¹J¨ì¥k¬A¸¹ ´N¤@ª½©¹¦^§ä¨ì¹ïÀ³ªº¥ª¬A¸¹
-	                     //¤@¥¹match¨ì".*(.*)"³o¼Ëªº¦r¤¸§Ç¦C
-	                     //´N¥á¶i¤@­Ó¦î¦C(Queue)©Î°}¦C¦ê¦C(ArrayList)¤§¤¤
+	                     //è®€åˆ°ç¬¬ä¸€å€‹å·¦å¤§æ‹¬è™Ÿæ™‚ é–‹å§‹æŠŠè©²æ–¹æ³•çš„ç¨‹å¼ç¢¼åŒ–ç‚ºå­—å…ƒæ”¾é€²Stack
+	                     //é‡åˆ°å³æ‹¬è™Ÿ å°±ä¸€ç›´å¾€å›æ‰¾åˆ°å°æ‡‰çš„å·¦æ‹¬è™Ÿ
+	                     //ä¸€æ—¦matchåˆ°".*(.*)"é€™æ¨£çš„å­—å…ƒåºåˆ—
+	                     //å°±ä¸Ÿé€²ä¸€å€‹ä½‡åˆ—(Queue)æˆ–é™£åˆ—ä¸²åˆ—(ArrayList)ä¹‹ä¸­
 	                     ArrayList<String> submethods = new ArrayList<String>();
 	                     L5:
 	                     while (i < inputFile.getLineNumber() && !methContent.empty()) {
@@ -305,7 +305,7 @@ import java.util.Stack;
 	                                     submethods.add(temp + "(.*)");
 	                                 }
 	                             }
-	                             else if (ch[j] == '/') { // ©¿²¤µù¸Ñ
+	                             else if (ch[j] == '/') { // å¿½ç•¥è¨»è§£
 	                                 j++;
 	                                 if (ch[j] == '/') {
 	                                     break;
@@ -323,7 +323,7 @@ import java.util.Stack;
 	                                     }
 	                                 }
 	                             }
-	                             else if (ch[j] == '"') { //©¿²¤¦r¦ê
+	                             else if (ch[j] == '"') { //å¿½ç•¥å­—ä¸²
 	                                 j++;
 	                                 for (; j < ch.length; j++) {
 	                                     if (ch[j] == '"') {
@@ -336,7 +336,7 @@ import java.util.Stack;
 	                                         }
 	                                     }
 	                                 }
-	                             } else if (ch[j] == '\'') { // ©¿²¤¦r¤¸
+	                             } else if (ch[j] == '\'') { // å¿½ç•¥å­—å…ƒ
 	                                 j += 2;
 	                                 if (ch[j + 1] == '\'') {
 	                                     j++;
@@ -370,7 +370,7 @@ import java.util.Stack;
 	             inputFile.close();
 	            
 	         } catch (IOException IOe) {
-	             System.out.println("¿é¤J¿é¥X¿ù»~");
+	             System.out.println("è¼¸å…¥è¼¸å‡ºéŒ¯èª¤");
 	             System.exit(1);
 	         }
 	         visitedMethods.remove(m);

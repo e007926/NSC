@@ -1,4 +1,3 @@
-package Ver2;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -43,17 +42,17 @@ public class Regression {
             HSSFRow row6 = sheet.createRow(5);
 
             HSSFCell cell = row1.createCell(0);
-            cell.setCellValue("¬ÛÃö«Y¼Æ");
+            cell.setCellValue("ç›¸é—œä¿‚æ•¸");
             cell = row2.createCell(0);
-            cell.setCellValue("°jÂk¤èµ{¦¡¡Gy = bx + B");
+            cell.setCellValue("è¿´æ­¸æ–¹ç¨‹å¼ï¼šy = bx + B");
             cell = row3.createCell(0);
-            cell.setCellValue("±×²v(b)");
+            cell.setCellValue("æ–œç‡(b)");
             cell = row4.createCell(0);
-            cell.setCellValue("ºI¶Z(B)");
+            cell.setCellValue("æˆªè·(B)");
             cell = row6.createCell(0);
-            cell.setCellValue("¥\¯àÂI¼Æ(x)");
+            cell.setCellValue("åŠŸèƒ½é»æ•¸(x)");
             cell = row6.createCell(1);
-            cell.setCellValue("¦æ¼Æ(y)");
+            cell.setCellValue("è¡Œæ•¸(y)");
             try (FileOutputStream fOut = new FileOutputStream(docPath)) {
                 wb.write(fOut);
                 fOut.flush();
@@ -80,7 +79,7 @@ public class Regression {
             FileOutputStream fOut = new FileOutputStream(filePath);
             wb.write(fOut);
             fOut.flush();
-            // ¾Ş§@µ²§ô¡AÃö³¬ÀÉ
+            // æ“ä½œçµæŸï¼Œé—œé–‰æª”
             fOut.close();
 
             HSSFRow row0 = sheet.getRow(0);
@@ -88,16 +87,16 @@ public class Regression {
             HSSFRow row2 = sheet.getRow(2);
             HSSFRow row3 = sheet.getRow(3);
 
-            row0.createCell(0).setCellFormula("\"¬ÛÃö«Y¼Æ = \"&CORREL(A$7:A$65536, B$7:B$65536)");
-            row1.createCell(0).setCellFormula("\"°jÂk¤èµ{¦¡¡Gy = bx + B = \"&SLOPE(B$7:B$65536, A$7:A$65536)&\" x + \"&INTERCEPT(B$7:B$65536,A$7:A$65536)");
-            row2.createCell(0).setCellFormula("\"±×²v(b) = \"&SLOPE(B$7:B$65536, A$7:A$65536)");
-            row3.createCell(0).setCellFormula("\"ºI¶Z(B) = \"&INTERCEPT(B$7:B$65536,A$7:A$65536)");
+            row0.createCell(0).setCellFormula("\"ç›¸é—œä¿‚æ•¸ = \"&CORREL(A$7:A$65536, B$7:B$65536)");
+            row1.createCell(0).setCellFormula("\"è¿´æ­¸æ–¹ç¨‹å¼ï¼šy = bx + B = \"&SLOPE(B$7:B$65536, A$7:A$65536)&\" x + \"&INTERCEPT(B$7:B$65536,A$7:A$65536)");
+            row2.createCell(0).setCellFormula("\"æ–œç‡(b) = \"&SLOPE(B$7:B$65536, A$7:A$65536)");
+            row3.createCell(0).setCellFormula("\"æˆªè·(B) = \"&INTERCEPT(B$7:B$65536,A$7:A$65536)");
 
-            // ·s«Ø¤@¿é¥XÀÉ®×¬y
+            // æ–°å»ºä¸€è¼¸å‡ºæª”æ¡ˆæµ
             fOut = new FileOutputStream(filePath);
             wb.write(fOut);
             fOut.flush();
-            // ¾Ş§@µ²§ô¡AÃö³¬ÀÉ
+            // æ“ä½œçµæŸï¼Œé—œé–‰æª”
             fOut.close();
         } catch (IOException ex) {
         }

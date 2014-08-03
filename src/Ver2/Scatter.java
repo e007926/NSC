@@ -1,4 +1,4 @@
-package Ver2;
+
 import java.awt.Font;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -89,7 +89,7 @@ public class Scatter extends ApplicationFrame {
         return "y = " + B1 + " x + " + B0;
     }
     // create a dataset...
-    private static final XYSeries series = new XYSeries("®×¨Ò");
+    private static final XYSeries series = new XYSeries("æ¡ˆä¾‹");
 
     private XYDataset createDataset() {
         XYSeriesCollection result = new XYSeriesCollection();
@@ -111,25 +111,25 @@ public class Scatter extends ApplicationFrame {
         // create a chart...
         JFreeChart chart = ChartFactory.createScatterPlot(
                 show.getEq(), // chart title
-                "¥\¯àÂI¼Æ", // x axis label
-                "µ{¦¡½X¦æ¼Æ", // y axis label
+                "åŠŸèƒ½é»æ•¸", // x axis label
+                "ç¨‹å¼ç¢¼è¡Œæ•¸", // y axis label
                 show.createDataset(), // data
                 PlotOrientation.VERTICAL,
                 true, // include legend
                 true, // tooltips
                 false // urls
                 );
-        Font font = new Font("¼Ğ·¢Åé", Font.BOLD, 16);
-        chart.getLegend().setItemFont(font); // ¹Ï¨Ò
-        chart.getTitle().setFont(font); // ¼ĞÃD
-        chart.getXYPlot().getDomainAxis().setLabelFont(font); // ¥ª¦C¼ĞÃD
-        chart.getXYPlot().getDomainAxis().setTickLabelFont(font); // ¥ª¦C
-        chart.getXYPlot().getRangeAxis().setLabelFont(font); // ¤W¦C¼ĞÃD
-        chart.getXYPlot().getRangeAxis().setTickLabelFont(font); // ¤W¦C
+        Font font = new Font("æ¨™æ¥·é«”", Font.BOLD, 16);
+        chart.getLegend().setItemFont(font); // åœ–ä¾‹
+        chart.getTitle().setFont(font); // æ¨™é¡Œ
+        chart.getXYPlot().getDomainAxis().setLabelFont(font); // å·¦åˆ—æ¨™é¡Œ
+        chart.getXYPlot().getDomainAxis().setTickLabelFont(font); // å·¦åˆ—
+        chart.getXYPlot().getRangeAxis().setLabelFont(font); // ä¸Šåˆ—æ¨™é¡Œ
+        chart.getXYPlot().getRangeAxis().setTickLabelFont(font); // ä¸Šåˆ—
         // create and display a frame...
-        ChartFrame frame = new ChartFrame("´²§G¹Ï", chart);
+        ChartFrame frame = new ChartFrame("æ•£ä½ˆåœ–", chart);
         frame.pack();
-        //µe­±¸m¤¤
+        //ç•«é¢ç½®ä¸­
         RefineryUtilities.centerFrameOnScreen(frame);
         frame.setVisible(true);
         return B1;

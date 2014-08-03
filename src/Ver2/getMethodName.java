@@ -1,4 +1,4 @@
-package Ver2;
+
 public class getMethodName {
 	
 	String getName(char[] ch){

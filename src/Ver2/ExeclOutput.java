@@ -1,4 +1,4 @@
-package Ver2;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -37,30 +37,30 @@ public class ExeclOutput {
             
             
             //HSSFCell cell = row1.createCell(0);
-            //cell.setCellValue("Ãş§O¦WºÙ");
+            //cell.setCellValue("é¡åˆ¥åç¨±");
             HSSFCell cell = row1.createCell(2);          
-            cell.setCellValue("´`Àô½ÆÂø«×");
+            cell.setCellValue("å¾ªç’°è¤‡é›œåº¦");
             cell = row1.createCell(5);
-            cell.setCellValue("¤èªk¤¤©I¥sªº¤l¤èªk");
+            cell.setCellValue("æ–¹æ³•ä¸­å‘¼å«çš„å­æ–¹æ³•");
             cell = row1.createCell(8);
-            cell.setCellValue("¤èªk¤¤©I¥sªºª«¥ó");
+            cell.setCellValue("æ–¹æ³•ä¸­å‘¼å«çš„ç‰©ä»¶");
             
             cell = row2.createCell(0);
-            cell.setCellValue("¤èªk¦WºÙ");
+            cell.setCellValue("æ–¹æ³•åç¨±");
             cell = row2.createCell(1);
-            cell.setCellValue("ª«¥ó¦W");
+            cell.setCellValue("ç‰©ä»¶å");
             cell = row2.createCell(2);
-            cell.setCellValue("½ÆÂø«×");
+            cell.setCellValue("è¤‡é›œåº¦");
             cell = row2.createCell(3);
-            cell.setCellValue("µ²ªG");          
+            cell.setCellValue("çµæœ");          
             cell = row2.createCell(5);
-            cell.setCellValue("­Ó¼Æ");
+            cell.setCellValue("å€‹æ•¸");
             cell = row2.createCell(6);
-            cell.setCellValue("µ²ªG");            
+            cell.setCellValue("çµæœ");            
             cell = row2.createCell(8);
-            cell.setCellValue("­Ó¼Æ");
+            cell.setCellValue("å€‹æ•¸");
             cell = row2.createCell(9);
-            cell.setCellValue("µ²ªG");
+            cell.setCellValue("çµæœ");
                               
             try (FileOutputStream fOut = new FileOutputStream(docPath)) {
                 wb.write(fOut);
@@ -87,7 +87,7 @@ public class ExeclOutput {
             FileOutputStream fOut = new FileOutputStream(filePath);
             wb.write(fOut);
             fOut.flush();
-            // ¾Ş§@µ²§ô¡AÃö³¬ÀÉ
+            // æ“ä½œçµæŸï¼Œé—œé–‰æª”
             fOut.close();
 
         } catch (IOException ex) {
@@ -125,7 +125,7 @@ public class ExeclOutput {
             FileOutputStream fOut = new FileOutputStream(filePath);
             wb.write(fOut);
             fOut.flush();
-            // ¾Ş§@µ²§ô¡AÃö³¬ÀÉ
+            // æ“ä½œçµæŸï¼Œé—œé–‰æª”
             fOut.close();
 
         } catch (IOException ex) {

@@ -1,13 +1,16 @@
-package Ver2;
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 import javax.swing.JOptionPane;
+
 import org.jfree.ui.RefineryUtilities;
 /*
  * To change this template, choose Tools | Templates
@@ -27,6 +30,7 @@ public class CFP_GUI extends javax.swing.JFrame {
         initComponents();
         RefineryUtilities.centerFrameOnScreen(this);
     }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -39,9 +43,9 @@ public class CFP_GUI extends javax.swing.JFrame {
 
         jButton1 = new javax.swing.JButton();
         jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
+       // jTextField2 = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        //jLabel2 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
         jButton2 = new javax.swing.JButton();
@@ -52,7 +56,7 @@ public class CFP_GUI extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jButton1.setFont(new java.awt.Font("∑s≤”©˙≈È", 0, 14)); // NOI18N
+        jButton1.setFont(new java.awt.Font("Êñ∞Á¥∞ÊòéÈ´î", 0, 14)); // NOI18N
         jButton1.setText("Analyze");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -60,15 +64,15 @@ public class CFP_GUI extends javax.swing.JFrame {
             }
         });
 
-        jTextField1.setFont(new java.awt.Font("∑s≤”©˙≈È", 0, 14)); // NOI18N
+        jTextField1.setFont(new java.awt.Font("Êñ∞Á¥∞ÊòéÈ´î", 0, 14)); // NOI18N
 
-        jTextField2.setFont(new java.awt.Font("∑s≤”©˙≈È", 0, 14)); // NOI18N
+       // jTextField2.setFont(new java.awt.Font("Êñ∞Á¥∞ÊòéÈ´î", 0, 14)); // NOI18N
 
-        jLabel1.setFont(new java.awt.Font("∑s≤”©˙≈È", 0, 14)); // NOI18N
-        jLabel1.setText("Absolute path°G");
+        jLabel1.setFont(new java.awt.Font("Êñ∞Á¥∞ÊòéÈ´î", 0, 14)); // NOI18N
+        jLabel1.setText("Absolute pathÔºö");
 
-        jLabel2.setFont(new java.awt.Font("∑s≤”©˙≈È", 0, 14)); // NOI18N
-        jLabel2.setText("Method name°G");
+        //jLabel2.setFont(new java.awt.Font("Êñ∞Á¥∞ÊòéÈ´î", 0, 14)); // NOI18N
+        //jLabel2.setText("Method nameÔºö");
 
         jTextArea1.setEditable(false);
         jTextArea1.setColumns(20);
@@ -76,7 +80,7 @@ public class CFP_GUI extends javax.swing.JFrame {
         jTextArea1.setRows(5);
         jScrollPane1.setViewportView(jTextArea1);
 
-        jButton2.setFont(new java.awt.Font("∑s≤”©˙≈È", 0, 14)); // NOI18N
+        jButton2.setFont(new java.awt.Font("Êñ∞Á¥∞ÊòéÈ´î", 0, 14)); // NOI18N
         jButton2.setText("Show information");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -84,7 +88,7 @@ public class CFP_GUI extends javax.swing.JFrame {
             }
         });
 
-        jButton3.setFont(new java.awt.Font("∑s≤”©˙≈È", 0, 14)); // NOI18N
+        jButton3.setFont(new java.awt.Font("Êñ∞Á¥∞ÊòéÈ´î", 0, 14)); // NOI18N
         jButton3.setText("Lines estimate");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -92,7 +96,7 @@ public class CFP_GUI extends javax.swing.JFrame {
             }
         });
 
-        jButton4.setFont(new java.awt.Font("∑s≤”©˙≈È", 0, 14)); // NOI18N
+        jButton4.setFont(new java.awt.Font("Êñ∞Á¥∞ÊòéÈ´î", 0, 14)); // NOI18N
         jButton4.setText("End");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -100,7 +104,7 @@ public class CFP_GUI extends javax.swing.JFrame {
             }
         });
         
-        jButton5.setFont(new java.awt.Font("∑s≤”©˙≈È", 0, 14)); // NOI18N
+        jButton5.setFont(new java.awt.Font("Êñ∞Á¥∞ÊòéÈ´î", 0, 14)); // NOI18N
         jButton5.setText("Complexity Count");
         jButton5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -108,8 +112,8 @@ public class CFP_GUI extends javax.swing.JFrame {
             }
         });
 
-        jLabel3.setFont(new java.awt.Font("∑s≤”©˙≈È", 0, 14)); // NOI18N
-        jLabel3.setText("Absolute pathΩ–øÈ§J±˝¥˙∏’§ß.java¿…∏ÙÆ|°A©Œ§@≠”•]ßt±˝¥˙∏’.java¿…§ß∏ÍÆ∆ß®∏ÙÆ|");
+        jLabel3.setFont(new java.awt.Font("Êñ∞Á¥∞ÊòéÈ´î", 0, 14)); // NOI18N
+        jLabel3.setText("Absolute pathË´ãËº∏ÂÖ•Ê¨≤Ê∏¨Ë©¶‰πã.javaÊ™îË∑ØÂæëÔºåËã•Ë¶ÅÈÄ≤Ë°åË§áÈõúÂ∫¶Ë®àÁÆóÂâáË´ãËº∏ÂÖ•‰∏ÄÂÄãÂåÖÂê´Ê¨≤Ê∏¨Ë©¶.javaÊ™î‰πãË≥áÊñôÂ§æË∑ØÂæë");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -125,9 +129,10 @@ public class CFP_GUI extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jLabel2)
+                        //.addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        //.addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        )
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jButton1)
                         .addGap(33, 33, 33)
@@ -147,8 +152,9 @@ public class CFP_GUI extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    //.addComponent(jLabel2)
+                    //.addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    )
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel3)
                 .addGap(10, 10, 10)
@@ -172,17 +178,19 @@ public class CFP_GUI extends javax.swing.JFrame {
     int numCurrentFile = 0;
     String excelPath = "D:\\co.xls";
     static boolean state = true;
-
+    
+     static String fileName="";
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                         
         // TODO add your handling code here:
-        String absolutePath = jTextField1.getText();
-        try {
+    	jTextArea1.setText("");
+        String packagePath = jTextField1.getText();
+        /*try {
             tempFile.createNewFile();
             WriterStream = new BufferedWriter(new FileWriter(tempFile));
         } catch (IOException ex) {
-            JOptionPane.showMessageDialog(null, "º»¶s¿…Æ◊´ÿ•ﬂø˘ª~", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Êö´Â≠òÊ™îÊ°àÂª∫Á´ãÈåØË™§", "Error", JOptionPane.ERROR_MESSAGE);
             state = false;
-        }
+        }        
         if (state) {
             try {
                 if (absolutePath.matches(".+.java")) {
@@ -198,7 +206,7 @@ public class CFP_GUI extends javax.swing.JFrame {
                             WriterStream.newLine();
                         } while (true);
                     } catch (IOException ex) {
-                        JOptionPane.showMessageDialog(null, "∑sºW•¢±—", "Error", JOptionPane.ERROR_MESSAGE);
+                        JOptionPane.showMessageDialog(null, "Êñ∞Â¢ûÂ§±Êïó", "Error", JOptionPane.ERROR_MESSAGE);
                         state = false;
                     }
                 } else {
@@ -207,35 +215,63 @@ public class CFP_GUI extends javax.swing.JFrame {
                 WriterStream.close();
             } catch (IOException ex) {
             }
-        }
+        }*/
         if (state) {
-            String methodName = jTextField2.getText() + "(.*)";
-            Countcfp ccfp = new Countcfp(concentratePath);
+        	        	
+        	/*for(int a=absolutePath.length()-1;a>=0;a--){
+    			if(absolutePath.charAt(a)=='\\')
+    			{
+    				packagePath=absolutePath.substring(0, a);
+    				fileName=absolutePath.substring(a+1, absolutePath.length());
+    						break;
+    			}
+    		}*/
+            //String methodName = jTextField2.getText() + "(.*)";
             try {
-            	CyclomaticComplexity cc=new CyclomaticComplexity();
-            	cc.CyclomaticComplexity("E:\\Dropbox\\Dropbox\\Ω“∑~\\∞Í¨Ï∑|•\Ø‡¬I\\CFPv2\\src");//∂Ò§Jæ„≠”pacakage™∫∏ÍÆ∆ß®¶Ï∏m
-                System.out.println("aa");
-                ccfp.start_count(methodName); 
-                System.out.println("bb");
-                double cfp = ccfp.getTotalCfp();
-                System.out.println("cfp:"+cfp);
-                System.out.println("--cc--");
-                int cfpInt = (int) cfp + (((int) (cfp * 10)) % 10 >= 5 ? 1 : 0); //•|±À§≠§J¶‹≠”¶Ïº∆
-                jTextArea1.setText("");
-                jTextArea1.append(ccfp.show_detail()); //show•X≤”∏`
-                jTextArea1.append("---\n•H§Ë™k" + methodName + "¨∞∞_¬I§ß•\Ø‡¬Iº∆¨∞" + cfpInt);
-                JOptionPane.showMessageDialog(null, "•\Ø‡¬I≠p∫‚ßπ≤¶");
-                int linesCount = (int) ccfp.total_lines();
-                Regression excel = new Regression(excelPath);
-                excel.addData(cfpInt, linesCount);
+            	//CyclomaticComplexity cc=new CyclomaticComplexity();
+            	//cc.CyclomaticComplexity(packagePath);//Â°´ÂÖ•Êï¥ÂÄãpacakageÁöÑË≥áÊñôÂ§æ‰ΩçÁΩÆ
+               // System.out.println("aa");
+                //ccfp.start_count(); 
+                //System.out.println("bb");
+            	cfpAll cfpall = new cfpAll();
+            	cfpall.cfpAll(packagePath);
+            	System.out.println("aa");
+            	jTextArea1.setText("");
+            	jTextArea1.append(cfpall.show_detail());
+            	System.out.println("bb");
+                ArrayList<String> methodListAll = cfpall.getMethodListAll(); 
+                for(String name:methodListAll){
+                	double cfp = cfpall.getTotalCfp(name);
+                	System.out.println("cfp:"+cfp);
+                	System.out.println("--cc--");
+                	int cfpInt = (int) cfp + (((int) (cfp * 10)) % 10 >= 5 ? 1 : 0); //ÂõõÊç®‰∫îÂÖ•Ëá≥ÂÄã‰ΩçÊï∏
+                	
+                	//jTextArea1.append("---\n‰ª•ÊñπÊ≥ï" + name + "ÁÇ∫Ëµ∑Èªû‰πãÂäüËÉΩÈªûÊï∏ÁÇ∫" + cfpInt);
+                	int linesCount = (int) cfpall.total_lines();
+                	Regression excel = new Regression(excelPath);
+                	excel.addData(cfpInt, linesCount);
+            	}
+               /* for(String name:methodList){
+                	double cfp = ccfp.getTotalCfp(name);
+                	System.out.println("cfp:"+cfp);
+                	System.out.println("--cc--");
+                	int cfpInt = (int) cfp + (((int) (cfp * 10)) % 10 >= 5 ? 1 : 0); //ÂõõÊç®‰∫îÂÖ•Ëá≥ÂÄã‰ΩçÊï∏
+                	jTextArea1.setText("");
+                	jTextArea1.append(ccfp.show_detail()); //showÂá∫Á¥∞ÁØÄ
+                	//jTextArea1.append("---\n‰ª•ÊñπÊ≥ï" + name + "ÁÇ∫Ëµ∑Èªû‰πãÂäüËÉΩÈªûÊï∏ÁÇ∫" + cfpInt);
+                	int linesCount = (int) ccfp.total_lines();
+                	Regression excel = new Regression(excelPath);
+                	excel.addData(cfpInt, linesCount);
+            	}*/
+                JOptionPane.showMessageDialog(null, "ÂäüËÉΩÈªûË®àÁÆóÂÆåÁï¢");
             } catch (Exception ex) {
                 System.out.println(ex);
-                JOptionPane.showMessageDialog(null, "µL¶π§Ë™k", "Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null, "ÁÑ°Ê≠§ÊñπÊ≥ï", "Error", JOptionPane.ERROR_MESSAGE);
             }
         }
         tempFile.delete();
         jTextField1.setText("");
-        jTextField2.setText("");
+        //jTextField2.setText("");
         state = true;
     }                                        
 
@@ -263,7 +299,7 @@ public class CFP_GUI extends javax.swing.JFrame {
                                 br.newLine();
                             } while (true);
                         } catch (IOException ex) {
-                            JOptionPane.showMessageDialog(null, "∑sºW•¢±—", "Error", JOptionPane.ERROR_MESSAGE);
+                            JOptionPane.showMessageDialog(null, "Êñ∞Â¢ûÂ§±Êïó", "Error", JOptionPane.ERROR_MESSAGE);
                             state = false;
                         }
                     } else {
@@ -272,7 +308,7 @@ public class CFP_GUI extends javax.swing.JFrame {
                 }
                 z = new File(z).getParent();
             } catch (NullPointerException ex) {
-                JOptionPane.showMessageDialog(null, "∏ÙÆ|øÈ§Jø˘ª~", "Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Ë∑ØÂæëËº∏ÂÖ•ÈåØË™§", "Error", JOptionPane.ERROR_MESSAGE);
                 state = false;
             }
         }
@@ -281,7 +317,7 @@ public class CFP_GUI extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {                                         
         // TODO add your handling code here:
         if (!new File(excelPath).exists()) {
-            JOptionPane.showMessageDialog(null, "®S¶≥≤Œ≠p∏ÍÆ∆", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Ê≤íÊúâÁµ±Ë®àË≥áÊñô", "Error", JOptionPane.ERROR_MESSAGE);
         } else {
             try {
                 Process p = Runtime.getRuntime().exec("cmd.exe /C" + excelPath);
@@ -290,7 +326,7 @@ public class CFP_GUI extends javax.swing.JFrame {
             Scatter scat = new Scatter("");
             double enough = scat.show(scat);
             if (String.valueOf(enough).equals("NaN")) {
-                JOptionPane.showMessageDialog(null, "≤Œ≠p∏ÍÆ∆§£®¨", "Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Áµ±Ë®àË≥áÊñô‰∏çË∂≥", "Error", JOptionPane.ERROR_MESSAGE);
             }
         }
     }                                        
@@ -298,9 +334,9 @@ public class CFP_GUI extends javax.swing.JFrame {
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {                                         
         // TODO add your handling code here:
         if (!new File(excelPath).exists()) {
-            JOptionPane.showMessageDialog(null, "®S¶≥≤Œ≠p∏ÍÆ∆°AµL™k≠p∫‚", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Ê≤íÊúâÁµ±Ë®àË≥áÊñôÔºåÁÑ°Ê≥ïË®àÁÆó", "Error", JOptionPane.ERROR_MESSAGE);
         } else {
-            String inputPoint = JOptionPane.showInputDialog("Ω–øÈ§J•\Ø‡¬Iº∆°G");
+            String inputPoint = JOptionPane.showInputDialog("Ë´ãËº∏ÂÖ•ÂäüËÉΩÈªûÊï∏Ôºö");
             if (inputPoint == null) {
             } else {
                 Scatter scat = new Scatter("");
@@ -309,15 +345,15 @@ public class CFP_GUI extends javax.swing.JFrame {
                         int outputLines = 0;
                         outputLines = scat.estimate(Integer.valueOf(inputPoint));
                         if (outputLines == 0) {
-                            JOptionPane.showMessageDialog(null, "≤Œ≠p∏ÍÆ∆§£®¨°AµL™k≠p∫‚", "Error", JOptionPane.ERROR_MESSAGE);
+                            JOptionPane.showMessageDialog(null, "Áµ±Ë®àË≥áÊñô‰∏çË∂≥ÔºåÁÑ°Ê≥ïË®àÁÆó", "Error", JOptionPane.ERROR_MESSAGE);
                         } else {
-                            JOptionPane.showMessageDialog(null, "πw¶Ù¶Êº∆¨∞ " + outputLines + " ¶Ê");
+                            JOptionPane.showMessageDialog(null, "È†ê‰º∞Ë°åÊï∏ÁÇ∫ " + outputLines + " Ë°å");
                         }
                     } else {
-                        JOptionPane.showMessageDialog(null, "øÈ§Jæ„º∆ª›§j©Ûπs", "Error", JOptionPane.ERROR_MESSAGE);
+                        JOptionPane.showMessageDialog(null, "Ëº∏ÂÖ•Êï¥Êï∏ÈúÄÂ§ßÊñºÈõ∂", "Error", JOptionPane.ERROR_MESSAGE);
                     }
                 } catch (NumberFormatException ex) {
-                    JOptionPane.showMessageDialog(null, "•≤∂∑øÈ§Jæ„º∆", "Error", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "ÂøÖÈ†àËº∏ÂÖ•Êï¥Êï∏", "Error", JOptionPane.ERROR_MESSAGE);
                 }
             }
         }
@@ -325,7 +361,7 @@ public class CFP_GUI extends javax.swing.JFrame {
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {                                         
         // TODO add your handling code here:
-        //ΩT´O•º∞ı¶Êßπ§¿™R°A§¥Ø‡∂∂ßQ±N¿…Æ◊ßR∞£
+        //Á¢∫‰øùÊú™Âü∑Ë°åÂÆåÂàÜÊûêÔºå‰ªçËÉΩÈ†ÜÂà©Â∞áÊ™îÊ°àÂà™Èô§
         if (tempFile.exists()) {
             try {
                 WriterStream.close();
@@ -333,7 +369,7 @@ public class CFP_GUI extends javax.swing.JFrame {
             }
             tempFile.delete();
         }
-        JOptionPane.showMessageDialog(null, "≈w™Ô§U¶∏¶A®”");
+        JOptionPane.showMessageDialog(null, "Ê≠°Ëøé‰∏ãÊ¨°ÂÜç‰æÜ");
         System.exit(0);
     }
     
@@ -343,19 +379,21 @@ public class CFP_GUI extends javax.swing.JFrame {
     	jTextArea1.setText("");
     	String packagePath = jTextField1.getText();
     	if(packagePath.equals("")){
-    		JOptionPane.showMessageDialog(null, "•ºøÈ§J•ÿº–∏ÙÆ|", "Error", JOptionPane.ERROR_MESSAGE);
+    		JOptionPane.showMessageDialog(null, "Êú™Ëº∏ÂÖ•ÁõÆÊ®ôË∑ØÂæë", "Error", JOptionPane.ERROR_MESSAGE);
     		state=false;
     	}
     	if(state){
-    	CyclomaticComplexity cc = new CyclomaticComplexity();
+    		CyclomaticComplexity cc=new CyclomaticComplexity();
     	cc.CyclomaticComplexity(packagePath);
+    	
+    	
     	}
     	}catch(Exception e){
     		System.out.println(e);
-    		JOptionPane.showMessageDialog(null, "µL¶π∏ÙÆ|", "Error", JOptionPane.ERROR_MESSAGE);
+    		JOptionPane.showMessageDialog(null, "ÁÑ°Ê≠§Ë∑ØÂæë", "Error", JOptionPane.ERROR_MESSAGE);
     	}
         jTextField1.setText("");
-        jTextField2.setText("");
+        //jTextField2.setText("");
         
     }
 
@@ -401,11 +439,11 @@ public class CFP_GUI extends javax.swing.JFrame {
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
+    //private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
+   // private javax.swing.JTextField jTextField2;
     // End of variables declaration                   
 }

@@ -1,99 +1,125 @@
-package Ver2;
 
 
+import java.io.*; //å¼•å…¥java.ioé¡åˆ¥åº«çš„æ‰€æœ‰é¡åˆ¥
+import java.util.*; //å¼•å…¥java.util.Scanneré¡åˆ¥
 
-import java.io.*; //¤Ş¤Jjava.ioÃş§O®wªº©Ò¦³Ãş§O
-import java.util.*; //¤Ş¤Jjava.util.ScannerÃş§O
 
-import org.apache.poi.hssf.usermodel.HSSFWorkbook;
-import org.apache.poi.hssf.usermodel.HSSFSheet;
-import org.apache.poi.hssf.usermodel.HSSFRow;
-import org.apache.poi.hssf.usermodel.HSSFCell;
 /**
  *
  * @author Lucius & SmallFour
  * 
- * ¶]§¹start_count()
+ * è·‘å®Œstart_count()
  * 
- * ¦A°õ¦ægetTotalCfp()¡BgetTotalHighComplexity()¡BgetTotalHighMethod()¡BgetTotalHighClass()
+ * å†åŸ·è¡ŒgetTotalCfp()ã€getTotalHighComplexity()ã€getTotalHighMethod()ã€getTotalHighClass()
  * 
  */
 
 class Countcfp {
     String fileName;
     private double totalLines = 0;
-    ArrayList<String> methodList = new ArrayList<String>(); // ¤èªk¦WºÙ
-    ArrayList<Double> methodCfpList = new ArrayList<Double>(); // ¦P¦W¤èªk¥­§¡¥\¯àÂI¼Æ
-    ArrayList<Integer> methodNumList = new ArrayList<Integer>(); // ¦P¦W¤èªk­Ó¼Æ
-    ArrayList<Integer> methodFirstLineList = new ArrayList<Integer>(); // ²Ä¤@¦¸¥X²{ªº¦æ¼Æ
-    ArrayList<Double> methodLinesList = new ArrayList<Double>(); // ¦P¦W¤èªk¥­§¡¦æ¼Æ
+    ArrayList<String> methodList = new ArrayList<String>(); // æ–¹æ³•åç¨±
+    ArrayList<Double> methodCfpList = new ArrayList<Double>(); // åŒåæ–¹æ³•å¹³å‡åŠŸèƒ½é»æ•¸
+    ArrayList<Double> methodHComplexityCfpList = new ArrayList<Double>();
+    ArrayList<Double> methodHMethodCfpList = new ArrayList<Double>();
+    ArrayList<Double> methodHClassCfpList = new ArrayList<Double>();
+    ArrayList<Integer> methodNumList = new ArrayList<Integer>(); // åŒåæ–¹æ³•å€‹æ•¸
+    ArrayList<Integer> methodFirstLineList = new ArrayList<Integer>(); // ç¬¬ä¸€æ¬¡å‡ºç¾çš„è¡Œæ•¸
+    ArrayList<Double> methodLinesList = new ArrayList<Double>(); // åŒåæ–¹æ³•å¹³å‡è¡Œæ•¸
     // total data
     private double cfp = 0;
     private double hComplexityCfp = 0;
     private double hMethodCfp = 0;
     private double hClassCfp = 0;
     
-    public Countcfp() {
-    }
-
     public Countcfp(String fileName) {
         this.fileName = fileName;
     }
     
-    void start_count(String methodName) throws Exception {
-        HashSet hs = new HashSet();
+    void start_count() throws Exception {
+        // Fill all the functional-point variables in the lists with "zero" and all the non-functional-point variables with an appropriate value.
         make_list();
-        for(int a=0;a<methodCfpList.size();a++){
-        	System.out.println("methodCfpList:"+methodCfpList.get(a));
-        }
-        System.out.println("make_list finish");
         
+        System.out.println("make_list finished.");
+       /*for(int a=0;a<methodList.size();a++){
+    	   System.out.println("methodname:"+methodList.get(a));
+       }*/
+        // Calculate the specific variable corresponding to the given method.
+        for(String methodName : methodList){
+            // The initialization.
+            this.cfp = 0;
+            this.hComplexityCfp = 0;
+            this.hMethodCfp = 0;
+            this.hClassCfp = 0;
+            HashSet hs = new HashSet();
+            
+            count_cfp(methodFirstLineList.get(methodList.indexOf(methodName)), methodName, hs);
+            
+            // Fill the specific variables corresponding to the given method.
+            int index = methodList.indexOf(methodName);
 
-        count_cfp(methodFirstLineList.get(methodList.indexOf(methodName)), methodName, hs);
-        for(int a=0;a<methodCfpList.size();a++){
-        	System.out.println("methodCfpList:"+methodCfpList.get(a));
+            this.cfp /= methodNumList.get(index);
+            this.hComplexityCfp /= methodNumList.get(index);
+            this.hMethodCfp /= methodNumList.get(index);
+            this.hClassCfp /= methodNumList.get(index);
+            this.methodCfpList.set(index, this.cfp);
+            this.methodHComplexityCfpList.set(index, this.hComplexityCfp);
+            this.methodHMethodCfpList.set(index, this.hMethodCfp);
+            this.methodHClassCfpList.set(index, this.hClassCfp);
+            System.out.println( methodName + " : count_cfp finished." );
         }
-        System.out.println("count_cfp finish");
+        System.out.println("start_count finished.");
     }
-
     double total_lines() {
         return totalLines;
     }
-    double getTotalCfp(){
-        return this.cfp;
+    double getTotalCfp(String methodName){
+        return this.methodCfpList.get(this.methodList.indexOf(methodName));
     }
-    double getTotalHighComplexity(){
-        return this.hComplexityCfp;
+    double getTotalHighComplexity(String methodName){
+        return this.methodHComplexityCfpList.get(this.methodList.indexOf(methodName));
     }
-    double getTotalHighMethod(){
-        return this.hMethodCfp;
+    double getTotalHighMethod(String methodName){
+        return this.methodHMethodCfpList.get(this.methodList.indexOf(methodName));
     }
-    double getTotalHighClass(){
-        return this.hClassCfp;
+    double getTotalHighClass(String methodName){
+        return this.methodHClassCfpList.get(this.methodList.indexOf(methodName));
     }
     
+    ArrayList<String> getMethodList(){
+    	return this.methodList;
+    }
     
-   /* void getArrayList() throws Exception{
-    	CyclomaticComplexity cc=new CyclomaticComplexity();
-    	cc.CyclomaticComplexity(fileName);
-    	
-			for(int i=0;i<cc.methodNameAll.size();i++)
-			{
-				methodNameAllTemp.add(cc.methodNameAll.get(i));
-			}
-			
-		}*/
+    ArrayList<Double> getMethodCfpList(){
+    	return this.methodCfpList;
+    }
+    ArrayList<Double> getMethodHComplexityCfpList(){
+    	return this.methodHComplexityCfpList;
+    }
+    ArrayList<Double> getMethodHMethodCfpList(){
+    	return this.methodHMethodCfpList;
+    }
+    ArrayList<Double> getMethodHClassCfpList(){
+    	return this.methodHClassCfpList;
+    }
+    ArrayList<Integer> getMethodNumList(){
+    	return this.methodNumList;
+    } 
+    ArrayList<Integer> getMethodFirstLineList (){
+    	return this.methodFirstLineList;
+    }
+    ArrayList<Double> getMethodLinesList(){
+    	return this.methodLinesList;
+    }
     
     
     String show_detail() {
-        String str = String.format("%-25s%-7s%-7s%-7s%-7s\n", "¤èªk¦WºÙ:", "¥­§¡CFP", "¦P¦W¤èªk¼Æ", "­º¦¸¥X²{¦æ¼Æ", "¦P¦W¤èªk¥­§¡¦æ¼Æ");
+        String str = String.format("%-25s%-7s%-11s%-11s%-11s%-7s%-7s%-7s\n",  "æ–¹æ³•åç¨±:", "å¹³å‡CFP","é«˜è¤‡é›œåº¦CFP","é«˜æ–¹æ³•æ•¸CFP","é«˜é¡åˆ¥æ•¸CFP", "åŒåæ–¹æ³•æ•¸", "é¦–æ¬¡å‡ºç¾è¡Œæ•¸", "åŒåæ–¹æ³•å¹³å‡è¡Œæ•¸");
         for (String s : methodList) {
             int index = methodList.indexOf(s);
-            str += String.format("%-30s%-10.1f%-10d%-10d%-10f\n", s, methodCfpList.get(index), methodNumList.get(index), methodFirstLineList.get(index), methodLinesList.get(index));
+            str += String.format("%-30s%-10.1f%-14.1f%-14.1f%-14.1f%-14d%-11d%-10f\n", s, getTotalCfp(s),getTotalHighComplexity(s),getTotalHighMethod(s),getTotalHighClass(s), methodNumList.get(index), methodFirstLineList.get(index), methodLinesList.get(index));
         }
         return str;
     }
-
     void make_list() {
         String[] form = {".*void ", ".*static double ", ".*static int ", ".*static float ", ".*static long ",
             ".*static byte ", ".*static short ", ".*static char ", ".*static String ",
@@ -107,13 +133,15 @@ class Countcfp {
         ArrayList<String> tempLines = new ArrayList<String>();
         try {
             String strData = inputFile.readLine();
+            
             for (int i = 0; i < inputFile.getLineNumber(); i++) {
+            	
                 for (String s : form) {
                     if (strData.matches(s + ".*(.*).*") && !strData.matches(".*;.*")) {
                         tempLines = new ArrayList<String>();
                         char[] ch = strData.toCharArray();
                         for (int j = 0; j < ch.length; j++) {
-                            if (ch[j] == '"') { //©¿²¤¦r¦ê
+                            if (ch[j] == '"') { //å¿½ç•¥å­—ä¸²
                                 j++;
                                 for (; j < ch.length; j++) {
                                     if (ch[j] == '"') {
@@ -126,12 +154,12 @@ class Countcfp {
                                         }
                                     }
                                 }
-                            } else if (ch[j] == '\'') { // ©¿²¤¦r¤¸
+                            } else if (ch[j] == '\'') { // å¿½ç•¥å­—å…ƒ
                                 j += 2;
                                 if (ch[j + 1] == '\'') {
                                     j++;
                                 }
-                            } else if (ch[j] == '/') { // ©¿²¤µù¸Ñ
+                            } else if (ch[j] == '/') { // å¿½ç•¥è¨»è§£
                                 j++;
                                 if (ch[j] == '/') {
                                     break;
@@ -159,7 +187,7 @@ class Countcfp {
                                     }
                                 }
                                 int z = i;
-                                int count = 1;
+                                int count = 0;
                                 tempLines.add(strData);
                                 while (count != 0) {
                                     i++;
@@ -173,6 +201,7 @@ class Countcfp {
                                     }
                                 }
                                 double lines = new LinesCountInputList().countMethodLines(tempLines);
+                                  
                                 if (isValidName(str)) {
                                     str += "(.*)";
                                     if (methodList.contains(str)) {
@@ -187,7 +216,10 @@ class Countcfp {
                                     } else {
                                         methodList.add(str);
                                         methodNumList.add(1);
-                                        methodCfpList.add(0.0); //¹w³]ªì©l¥­§¡¥\¯àÂI¼Æ¬°0.0
+                                        methodCfpList.add(0.0); //é è¨­åˆå§‹å¹³å‡åŠŸèƒ½é»æ•¸ç‚º0.0
+                                        methodHComplexityCfpList.add(0.0);
+                                        methodHMethodCfpList.add(0.0);
+                                        methodHClassCfpList.add(0.0);
                                         methodFirstLineList.add(z + 1);
                                         methodLinesList.add(lines);
                                     }
@@ -201,15 +233,13 @@ class Countcfp {
             }
             inputFile.close();
         } catch (IOException IOe) {
-            System.out.println("¿é¤J¿é¥X¿ù»~");
+            System.out.println("è¼¸å…¥è¼¸å‡ºéŒ¯èª¤");
             System.exit(1);
         }
 
         for (int i = 0; i < methodList.size(); i++) {
             methodLinesList.set(i, methodLinesList.get(i) / methodNumList.get(i));
         }
-        
-
     }
 
     @SuppressWarnings("static-access")
@@ -217,61 +247,55 @@ class Countcfp {
         totalLines += methodLinesList.get(methodList.indexOf(m));
         //double cfp = 0;
         visitedMethods.add(m);
+        //String ccfileName= CFP_GUI.fileName;
+       
         FileReader fileObject = null;
         
         try {
             fileObject = new FileReader(fileName);
         } catch (FileNotFoundException fe) {
-            System.out.println("ÀÉ®× \"" + fileName + "\" ¤£¦s¦b");
+            System.out.println("æª”æ¡ˆ \"" + fileName + "\" ä¸å­˜åœ¨");
             System.exit(1);
         }
 
         LineNumberReader inputFile = new LineNumberReader(fileObject);
         String strData;
-        CyclomaticComplexity cc=new CyclomaticComplexity();
-    	//cc.CyclomaticComplexity("H:/Ver2");
-        
+        CyclomaticComplexity cc = new CyclomaticComplexity();
+    	
         try {
             int i;
             strData = inputFile.readLine();
             for (i = 0; i < currentLineNum - 1; i++) {
                 strData = inputFile.readLine();
             }
-            
-           
             L:
             for (; i < inputFile.getLineNumber(); i++) {
                 if (methodList.contains(m)) {
-                    //Åª¦r¤¸®É ­n§âÅª¹Lªº¦r¤¸¦s¤J¤@­Ó¦r¤¸°ïÅ|(Stack) ±q²{¦bªº³o¦æ¶}ÀY¶}©l³v¦r¤¸Åª¨ú
+                	//è®€å­—å…ƒæ™‚ è¦æŠŠè®€éçš„å­—å…ƒå­˜å…¥ä¸€å€‹å­—å…ƒå †ç–Š(Stack) å¾ç¾åœ¨çš„é€™è¡Œé–‹é ­é–‹å§‹é€å­—å…ƒè®€å–
                     Stack methContent = new Stack<Character>();
                     int j = 0;
                     L1:
                     for (; i < inputFile.getLineNumber(); i++) {
                         if (strData.matches(".*" + m + ".*") && !strData.matches(".*;.*")) {
                             int tempIndex = methodList.indexOf(m);
-                            
-                            this.cfp += methodCfpList.get(tempIndex);            
-                            String mtemp =m.substring(0,m.length()-4);  
-                            
-                        	//System.out.println(mtemp);
-                           int ccindex= cc.methodNameAll.indexOf(mtemp);
-                          // System.out.println(ccindex);
-                                                     
-                          System.out.println("tttt");
-                            if(cc.methodListAll.get(ccindex)>10){ // °ª½ÆÂø«×
-                                this.hComplexityCfp += methodCfpList.get(tempIndex);                            	 
-                            }
-                            //System.out.println("hComplexityCfp"+hComplexityCfp);
-                            
-                            if(cc.subHighLowListAll.get(ccindex).equals("°ª")){ // °ª¤èªk¼Æ
-                                this.hMethodCfp += methodCfpList.get(tempIndex);
-                            }
-                            //System.out.println("hMethodCfp"+hMethodCfp);
-                            if(cc.objHighLowListAll.get(ccindex).equals("°ª")){ // °ªÃş§O¼Æ
-                                this.hClassCfp += methodCfpList.get(tempIndex);
-                            }
-                            //ystem.out.println("hClassCfp"+hClassCfp);
-                            System.out.println("ggggg");
+                            this.cfp += 1;                                                 
+                           
+                            String mtemp =m.substring(0,m.length()-4);
+                                                       
+                            int ccindex=cc.methodNameAll.indexOf(mtemp);
+                            	
+                                if(ccindex!=-1){
+                                	                                             	
+		                            if(cc.methodListAll.get(ccindex)>10){ // é«˜è¤‡é›œåº¦
+		                                this.hComplexityCfp += 1;   	                                
+		                            }
+		                            if(cc.subHighLowListAll.get(ccindex).equals("é«˜")){ // é«˜æ–¹æ³•æ•¸
+		                                this.hMethodCfp += 1;
+		                            }
+		                            if(cc.objHighLowListAll.get(ccindex).equals("é«˜")){ // é«˜é¡åˆ¥æ•¸
+		                                this.hClassCfp += 1;
+		                            }
+                                }
                             for (; i < inputFile.getLineNumber(); i++) {
                                 char[] ch = strData.toCharArray();
                                 for (j = 0; j < ch.length; j++) {
@@ -286,10 +310,10 @@ class Countcfp {
                         }
                         strData = inputFile.readLine();
                     }
-                    //Åª¨ì²Ä¤@­Ó¥ª¤j¬A¸¹®É ¶}©l§â¸Ó¤èªkªºµ{¦¡½X¤Æ¬°¦r¤¸©ñ¶iStack
-                    //¹J¨ì¥k¬A¸¹ ´N¤@ª½©¹¦^§ä¨ì¹ïÀ³ªº¥ª¬A¸¹
-                    //¤@¥¹match¨ì".*(.*)"³o¼Ëªº¦r¤¸§Ç¦C
-                    //´N¥á¶i¤@­Ó¦î¦C(Queue)©Î°}¦C¦ê¦C(ArrayList)¤§¤¤
+                  //è®€åˆ°ç¬¬ä¸€å€‹å·¦å¤§æ‹¬è™Ÿæ™‚ é–‹å§‹æŠŠè©²æ–¹æ³•çš„ç¨‹å¼ç¢¼åŒ–ç‚ºå­—å…ƒæ”¾é€²Stack
+                    //é‡åˆ°å³æ‹¬è™Ÿ å°±ä¸€ç›´å¾€å›æ‰¾åˆ°å°æ‡‰çš„å·¦æ‹¬è™Ÿ
+                    //ä¸€æ—¦matchåˆ°".*(.*)"é€™æ¨£çš„å­—å…ƒåºåˆ—
+                    //å°±ä¸Ÿé€²ä¸€å€‹ä½‡åˆ—(Queue)æˆ–é™£åˆ—ä¸²åˆ—(ArrayList)ä¹‹ä¸­
                     ArrayList<String> submethods = new ArrayList<String>();
                     L5:
                     while (i < inputFile.getLineNumber() && !methContent.empty()) {
@@ -309,7 +333,7 @@ class Countcfp {
                                 if (isValidName(temp) && !visitedMethods.contains(temp + "(.*)")) {
                                     submethods.add(temp + "(.*)");
                                 }
-                            } else if (ch[j] == '"') { //©¿²¤¦r¦ê
+                            } else if (ch[j] == '"') { //å¿½ç•¥å­—ä¸²
                                 j++;
                                 for (; j < ch.length; j++) {
                                     if (ch[j] == '"') {
@@ -322,12 +346,12 @@ class Countcfp {
                                         }
                                     }
                                 }
-                            } else if (ch[j] == '\'') { // ©¿²¤¦r¤¸
+                            } else if (ch[j] == '\'') { // å¿½ç•¥å­—å…ƒ
                                 j += 2;
                                 if (ch[j + 1] == '\'') {
                                     j++;
                                 }
-                            } else if (ch[j] == '/') { // ©¿²¤µù¸Ñ
+                            } else if (ch[j] == '/') { // å¿½ç•¥è¨»è§£
                                 j++;
                                 if (ch[j] == '/') {
                                     break;
@@ -352,7 +376,7 @@ class Countcfp {
                         strData = inputFile.readLine();
                         i++;
                     }
-                    //¹ï¨ä¤U©Ò¦³¤l¤èªk³v¤@°µ»¼°j¾Ş§@
+                    //å°å…¶ä¸‹æ‰€æœ‰å­æ–¹æ³•é€ä¸€åšéè¿´æ“ä½œ
                     for (String n : submethods) {
                         int index = methodList.indexOf(n);
                         if (index != -1) {
@@ -367,11 +391,10 @@ class Countcfp {
             }
             inputFile.close();
         } catch (IOException IOe) {
-            System.out.println("¿é¤J¿é¥X¿ù»~");
+            System.out.println("è¼¸å…¥è¼¸å‡ºéŒ¯èª¤");
             System.exit(1);
         }
         visitedMethods.remove(m);
-        
     }
 
     private static boolean isValidChar(char ch) {

@@ -1,4 +1,4 @@
-package Ver2;
+
 import java.util.Stack;
 
 
@@ -7,14 +7,14 @@ public class countCC {
 	String[] keyword = {"[\\W]*if(.*).*",".*else if(.*).*",".*else[\\W]*",".*for(.*;.*;.*).*",".*do.*",".*while(.*).*",".*switch(.*).*",".*case.*"};	
 	String[] op = {".*>.*",".*<.*",".*==.*",".*!=.*",".*>=.*",".*<=.*"};
 	char[] operator = {'&','|'};
-	Stack<Character> stack = new Stack<Character>();//¦s©ñ±ø¥ó¦¡{
-	Stack<Character> fstack = new Stack<Character>();//¦s©ñ±ø¥ó¦¡(
+	Stack<Character> stack = new Stack<Character>();//å­˜æ”¾æ¢ä»¶å¼{
+	Stack<Character> fstack = new Stack<Character>();//å­˜æ”¾æ¢ä»¶å¼(
 	boolean iscondi = false;
 	boolean isIf = false;
 	boolean isR = false;
 	
 	int countCondition(int count,char[] c,String s){
-				if(count==-1){//ªì©l¤Æ¦¨­ûÅÜ¼Æ¼Æ­È
+				if(count==-1){//åˆå§‹åŒ–æˆå“¡è®Šæ•¸æ•¸å€¼
 					isIf = false;
 					iscondi = false;
 					return 0;
