@@ -14,6 +14,9 @@ public class CyclomaticComplexity {
     public static   final   ArrayList<Integer> methodObjAll       = new ArrayList<Integer>();//存放package內所有檔案每方法呼叫之物件數
     public static   final   ArrayList<Integer> countPartmethod = new ArrayList<Integer>();
     public static   final   ArrayList<String> classNameAll = new ArrayList<String>();//存放package每方法之類別名稱 
+    public static   final 	ArrayList<Double> methodFirstLineListAll = new ArrayList<Double>();
+    public static   final 	ArrayList<Double> methodEndLineListAll = new ArrayList<Double>();
+    public static   final 	ArrayList<Integer> methodNumListAll = new ArrayList<Integer>(); //同名方法個數
 	public void CyclomaticComplexity(String path) throws Exception{
 		 String[] form = {".*void ", ".*static double ", ".*static int ", ".*static float ", ".*static long ",
 	            ".*static byte ", ".*static short ", ".*static char ", ".*static String ",
@@ -50,10 +53,14 @@ public class CyclomaticComplexity {
 			    ArrayList<String> className = new ArrayList<String>();//存放每方法之類別名稱
 			 	ArrayList<Integer> methodList = new ArrayList<Integer>();//存放每方法之最高循環複雜度
 			 	ArrayList<Integer> methodObj = new ArrayList<Integer>();//存放每方法呼叫之物件數
+			 	ArrayList<Integer> methodEndLineList = new ArrayList<Integer>();
+			 	
+			 	
 			 	int ttempCount = 0;//暫存循環複雜度
 			 	int tempCount = 0;//暫存循環複雜度中較大者
 		    	int cCount = 0;//最終循環複雜度
 		    	int cObject = 0;//計算物件數目
+		    	
 		    	String classname="";
 		    	Stack<Character> pStack = new Stack<Character>();
 		    	boolean isComment = false;//是否為註解
@@ -72,7 +79,8 @@ public class CyclomaticComplexity {
                 csop.show_methodName();
                 ArrayList<Double>countSubMethodList=csop.countSubMethodList; //存放子方法數
                 ArrayList<String>  methodNameSub= csop.methodList;    //存放子方法之名稱
-                
+                ArrayList<Integer> methodFirstLineList =csop.methodFirstLineList; //第一次出現的行數
+                ArrayList<Integer> methodNumList = csop.methodNumList;
 		    	//System.out.println("ClassName:"+fileName+",fileLine: "+fileLine);
 		    		int line = 0;//用以計算行數
 		    		boolean flags = true;
@@ -154,6 +162,7 @@ public class CyclomaticComplexity {
 		        					}	 		            	
 			                	 	methodList.add(cCount);
 			                	 	methodObj.add(cObject);
+			                	 	methodEndLineList.add(line);
 			                	 	//System.out.println("---------addCount:"+cCount);
 			                	 	//初始化數值
 			                	 	ttempCount=0;
@@ -172,9 +181,7 @@ public class CyclomaticComplexity {
 				            
 				            
 			    	}//End of while
-			    	for(int a=0;a<methodName.size();a++){
-                    	System.out.println("methodname:"+methodName.get(a)+" className:"+className.get(a));
-                    }
+			    	
                          //將本檔案存入計算整個package之ArrayList中
                          for(int y=0;y<methodName.size();y++){
                         	 String namet=methodName.get(y);
@@ -185,7 +192,10 @@ public class CyclomaticComplexity {
                         	 int countt=methodList.get(y);
                         	 int objt=methodObj.get(y);
                         	 Double csubt=countSubMethodList.get(y);
-                        	
+                        	 double  linest=methodEndLineList.get(y);
+                        	 double flinet=methodFirstLineList.get(y);
+                        	 int mnumt =methodNumList.get(y);
+                        	 
                         	 methodNameAll.add(namet);
                         	 methodNameSubAll.add(namesubt);
                         	 methodNameObjAll.add(nameobjt);
@@ -194,6 +204,9 @@ public class CyclomaticComplexity {
                         	 methodListAll.add(countt);
                         	 methodObjAll.add(objt);
                         	 countSubMethodListAll.add(csubt);
+                        	 methodFirstLineListAll.add(flinet);
+                        	 methodEndLineListAll.add(linest);
+                        	 methodNumListAll.add(mnumt);
                          }
                          //將該檔案之方法數存進Arraylist中
                          countPartmethod.add(methodName.size());

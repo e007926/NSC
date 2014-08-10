@@ -64,9 +64,13 @@ public class RegressionAll {
             cell = row7.createCell(3);
             cell.setCellValue("循環複雜度");
             cell = row7.createCell(6);
-            cell.setCellValue("方法中呼叫的子方法");
+            cell.setCellValue("高方法數複雜度");
             cell = row7.createCell(9);
-            cell.setCellValue("方法中呼叫的物件");
+            cell.setCellValue("高物件數複雜度");
+            cell = row7.createCell(11);
+            cell.setCellValue("方法行數");
+            cell = row7.createCell(13);
+            cell.setCellValue("該方法呼叫之方法總行數");
             
             cell = row8.createCell(0);
             cell.setCellValue("方法名稱");
@@ -74,18 +78,22 @@ public class RegressionAll {
             cell.setCellValue("物件名");
             cell = row8.createCell(2);
             cell.setCellValue("個數");
-            cell = row8.createCell(3);
-            cell.setCellValue("複雜度");
+            //cell = row8.createCell(3);
+           // cell.setCellValue("複雜度");
             cell = row8.createCell(4);
             cell.setCellValue("結果");
-            cell = row8.createCell(6);
-            cell.setCellValue("個數");
+            //cell = row8.createCell(6);
+            //cell.setCellValue("個數");
             cell = row8.createCell(7);
             cell.setCellValue("結果");            
-            cell = row8.createCell(9);
-            cell.setCellValue("個數");
+           // cell = row8.createCell(9);
+            //cell.setCellValue("個數");
             cell = row8.createCell(10);
             cell.setCellValue("結果");
+            cell = row8.createCell(11);
+            cell.setCellValue("行數");
+            cell = row8.createCell(13);
+            cell.setCellValue("行數");
             
             
             try (FileOutputStream fOut = new FileOutputStream(docPath)) {
@@ -97,7 +105,7 @@ public class RegressionAll {
         }
     }
 
-    public void addData(String method,String objName,double cfp,int cc , String ccResult,Double mt,String mtResult,int oo,String ooResult) {
+    public void addData(String method,String objName,double cfp,double cc ,Double mt,double oo,double lines,double calllines) {
         try {
         	fis = new FileInputStream(filePath);
             fs = new POIFSFileSystem(fis);
@@ -117,20 +125,24 @@ public class RegressionAll {
             cell.setCellValue(objName);
             cell = row.createCell(2);
             cell.setCellValue(cfp);
-            cell = row.createCell(3);
+           cell = row.createCell(4);
             cell.setCellValue(cc);
-            cell = row.createCell(4);
-            cell.setCellValue(ccResult);
+           // cell = row.createCell(4);
+           // cell.setCellValue(ccResult);
             
-            cell = row.createCell(6);
-            cell.setCellValue(mt);
             cell = row.createCell(7);
-            cell.setCellValue(mtResult);
+            cell.setCellValue(mt);
+            //cell = row.createCell(7);
+            //cell.setCellValue(mtResult);
             
-            cell = row.createCell(9);
-            cell.setCellValue(oo);
             cell = row.createCell(10);
-            cell.setCellValue(ooResult);
+            cell.setCellValue(oo);
+            //cell = row.createCell(10);
+            //cell.setCellValue(ooResult);
+            cell = row.createCell(11);
+            cell.setCellValue(lines);
+            cell = row.createCell(13);
+            cell.setCellValue(calllines);
 
             FileOutputStream fOut = new FileOutputStream(filePath);
             wb.write(fOut);

@@ -17,7 +17,7 @@ public class countObject {
 			     for(int i=0;i<sp.length;i++){
 			             if(sp[i].matches("new") || sp[i].matches(".*[\\W]new")){
 			            	 count++;
-			                 System.out.println(sp[i]);
+			                 //System.out.println(sp[i]);
 			             }
 			     }
 		     }
@@ -34,7 +34,7 @@ public class countObject {
 		for(String st:form){
 		        
 		if(s.matches(st+ ".*(.*).*") && !s.matches(".*;.*") && !s.matches(".*for(.*:.*).*")){
-		  System.out.println(s);
+		  //System.out.println(s);
 		 
 		 for(int i=0;i<s.length();i++){
 		      
@@ -52,7 +52,7 @@ public class countObject {
 				      for(int k=0;k<clare.length;k++){ 
 				         if(isObject(clare[k])){
 				             count++;
-				             System.out.println(clare[k]); 
+				            // System.out.println(clare[k]); 
 				         }
 				         else{
 				             count+=0;
@@ -62,7 +62,7 @@ public class countObject {
 				   else{
 				     if(isObject(ch)){
 				         count++;
-				         System.out.println(ch);
+				         //System.out.println(ch);
 				     }
 				     else{
 				         count+=0;

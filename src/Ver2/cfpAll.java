@@ -10,9 +10,11 @@ public class cfpAll {
     final ArrayList<Double> methodHMethodCfpListAll = new ArrayList<Double>();
     final ArrayList<Double> methodHClassCfpListAll = new ArrayList<Double>();
     final ArrayList<Integer> methodNumListAll = new ArrayList<Integer>(); // 同名方法個數
-    final ArrayList<Integer> methodFirstLineListAll = new ArrayList<Integer>(); // 第一次出現的行數
+     final ArrayList<Integer> methodFirstLineListAll = new ArrayList<Integer>(); // 第一次出現的行數
     final ArrayList<Double> methodLinesListAll = new ArrayList<Double>(); // 同名方法平均行數
     final  ArrayList<String> classNameAll = new ArrayList<String>();//存放package每方法之類別名稱 
+    final ArrayList<Double> partmethodLineListAll = new ArrayList<Double>(); 
+    final ArrayList<Double> partmethodCallLineListAll = new ArrayList<Double>(); 
     private double totalLinesAll = 0;
 	public void cfpAll(String path) throws Exception{
 	    
@@ -23,7 +25,7 @@ public class cfpAll {
 		 String[] allFiles = lf.listFile(filePath);
 		 String fileName;		 
 		 RegressionAll opt = new RegressionAll();
- 		 opt.createFile("D:/outputAll.xls");
+ 		 opt.createFile("D:/outputAll1.xls");
  		 
 		 CyclomaticComplexity cc = new CyclomaticComplexity();
 		 cc.CyclomaticComplexity(filePath);
@@ -34,6 +36,8 @@ public class cfpAll {
 				 
 				 Countcfp partccfp = new Countcfp(filePath+"/"+fileName);
 				 partccfp.start_count();
+				 System.out.println("----------------------countcfp finished------------------------");
+				
 				 
 				 ArrayList<String> methodList =partccfp.getMethodList();//存放每方法之名稱
 				 
@@ -43,10 +47,12 @@ public class cfpAll {
 				 ArrayList<Double> methodHClassCfpList = partccfp.getMethodHClassCfpList();
 				 ArrayList<Integer> methodNumList = partccfp.getMethodNumList(); // 同名方法個數
 				 ArrayList<Integer> methodFirstLineList = partccfp.getMethodFirstLineList();; // 第一次出現的行數
-				 ArrayList<Double> methodLinesList =partccfp.getMethodLinesList();; // 同名方法平均行數
-				 for(int a=0;a<methodList.size();a++){
+				 ArrayList<Double> methodLinesList =partccfp.getMethodLinesList(); // 同名方法平均行數
+				 ArrayList<Double> partmethodCallLineList = partccfp.getPartMethodLinesList(); 
+				
+				/* for(int a=0;a<methodList.size();a++){
                  	System.out.println("methodname:"+methodList.get(a));
-                 }
+                 }*/
 				 
                       //將本檔案存入計算整個package之ArrayList中
                       for(int y=0;y<methodList.size();y++){
@@ -58,6 +64,7 @@ public class cfpAll {
                      	 int numt=methodNumList.get(y);
                      	 int flt=methodFirstLineList.get(y);
                      	 double lt=methodLinesList.get(y);
+                     	 double pmclt=partmethodCallLineList.get(y);
                      	 
                      	String namett =namet.substring(0,namet.length()-4);
                      	
@@ -69,6 +76,7 @@ public class cfpAll {
                       	 methodNumListAll.add(numt);
                       	 methodFirstLineListAll.add(flt);
                       	 methodLinesListAll.add(lt);
+                      	 partmethodCallLineListAll.add(pmclt);
                       	totalLinesAll+=(int) partccfp.total_lines();
                       	
                       }
@@ -79,7 +87,7 @@ public class cfpAll {
          				 }
          				
          			 }*/
-                      System.out.println("totalLinesAll:"+totalLinesAll);
+                      //System.out.println("totalLinesAll:"+totalLinesAll);
                       
                       
 			 }
@@ -89,6 +97,10 @@ public class cfpAll {
 			}
 			 
 		 }
+		 //ArrayList<Integer> methodEndLineListAll = cc.methodEndLineListAll;
+		 
+		 
+		 
 		 //for(int b=0;b<methodListAll.size();b++){
 			// System.out.println("--methodListAll size:"+methodListAll.size()+" methodNameAll size:"+cc.methodNameAll.size()+"--");
 		 //}
@@ -99,18 +111,23 @@ public class cfpAll {
 				 methodHComplexityCfpListAll.remove(a);
 				 methodHMethodCfpListAll.remove(a);
 				 methodHClassCfpListAll.remove(a);
+				 methodFirstLineListAll.remove(a);
 				 --len;
 				 --a;
 			 }
-			 //System.out.println("methodListAll:"+methodListAll.get(a)+"  methodNameAll:"+cc.methodNameAll.get(a)+!methodListAll.get(a).equals(cc.methodNameAll.get(a)));
+			
 				
 				 
 			 
 		 }
-		 //for(int b=0;b<methodListAll.size();b++){
-			 //System.out.println("--(removed)methodListAll size:"+methodListAll.size()+" methodNameAll size:"+cc.methodNameAll.size()+"--");
-		// }
-		 
+		
+		 for(int a=0;a<methodFirstLineListAll.size();a++){
+			double methodLines=cc.methodEndLineListAll.get(a)-methodFirstLineListAll.get(a);
+			 partmethodLineListAll.add(methodLines+1);
+			
+		 }
+		 System.out.println("-----------------------------------------------");
+		
 		 int tempcountmethod=0; //暫存目前取到的methodNameAll數
          
          for(int lfi=0;lfi<allFiles.length;lfi++){ 
@@ -124,7 +141,7 @@ public class cfpAll {
          int count=0;
         	while(count<partmethod){ 
         		
-        		opt.addData(cc.methodNameAll.get(tempcountmethod+count),cc.classNameAll.get(tempcountmethod+count),methodCfpListAll.get(tempcountmethod+count),cc.methodListAll.get(tempcountmethod+count),(cc.methodListAll.get(tempcountmethod+count)>10)?"高":"低", cc.countSubMethodListAll.get(tempcountmethod+count),cc.subHighLowListAll.get(tempcountmethod+count), cc.methodObjAll.get(tempcountmethod+count),cc.objHighLowListAll.get(tempcountmethod+count));
+        		opt.addData(cc.methodNameAll.get(tempcountmethod+count),cc.classNameAll.get(tempcountmethod+count),methodCfpListAll.get(tempcountmethod+count),methodHComplexityCfpListAll.get(tempcountmethod+count),methodHMethodCfpListAll.get(tempcountmethod+count), methodHClassCfpListAll.get(tempcountmethod+count),partmethodLineListAll.get(tempcountmethod+count),partmethodCallLineListAll.get(tempcountmethod+count));
         		
         		count++;
         	}
@@ -132,7 +149,7 @@ public class cfpAll {
         
         	
          }//
-	    
+         
 	}
 	
 	double total_lines() {
@@ -159,7 +176,7 @@ public class cfpAll {
         for (String s : methodListAll) {
             int index = methodListAll.indexOf(s);
             
-            str += String.format("%-30s%-10.1f%-14.1f%-14.1f%-14.1f%-14d%-11d%-10f\n", s, getTotalCfp(s),getTotalHighComplexity(s),getTotalHighMethod(s),getTotalHighClass(s), methodNumListAll.get(index), methodFirstLineListAll.get(index), methodLinesListAll.get(index));
+            str += String.format("%-30s%-10.1f%-14.1f%-14.1f%-14.1f%-14d%-11d%-10f\n", s, getTotalCfp(s),getTotalHighComplexity(s),getTotalHighMethod(s),getTotalHighClass(s), methodNumListAll.get(index), methodFirstLineListAll.get(index), partmethodLineListAll.get(index));
         }
         return str;
     }

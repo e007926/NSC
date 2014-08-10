@@ -233,6 +233,7 @@ public class CFP_GUI extends javax.swing.JFrame {
                // System.out.println("aa");
                 //ccfp.start_count(); 
                 //System.out.println("bb");
+            		 
             	cfpAll cfpall = new cfpAll();
             	cfpall.cfpAll(packagePath);
             	System.out.println("aa");
