@@ -42,7 +42,7 @@ public class CyclomaticComplexity {
  		/*逐一取得package下之.java檔*/
 		 for(int lfi=0;lfi<allFiles.length;lfi++){	
 			 fileName=allFiles[lfi];
-		 
+			 //System.out.println("-----File Name:" + fileName+ "------");
 		 try {//讀取檔案
 		        inputFile = new LineNumberReader(new FileReader(filePath+"/"+fileName));
 		    } catch (FileNotFoundException ex) {
@@ -53,7 +53,7 @@ public class CyclomaticComplexity {
 			    ArrayList<String> className = new ArrayList<String>();//存放每方法之類別名稱
 			 	ArrayList<Integer> methodList = new ArrayList<Integer>();//存放每方法之最高循環複雜度
 			 	ArrayList<Integer> methodObj = new ArrayList<Integer>();//存放每方法呼叫之物件數
-			 	ArrayList<Integer> methodEndLineList = new ArrayList<Integer>();
+			 	ArrayList<Integer> methodEndLineList = new ArrayList<Integer>();//存放每方法之最後一行數
 			 	
 			 	
 			 	int ttempCount = 0;//暫存循環複雜度
@@ -78,10 +78,10 @@ public class CyclomaticComplexity {
 		    	CountSubMethodTest csop=new CountSubMethodTest(filePath+"/"+fileName); //呼叫計算子方法CLASS
                 csop.show_methodName();
                 ArrayList<Double>countSubMethodList=csop.countSubMethodList; //存放子方法數
-                ArrayList<String>  methodNameSub= csop.methodList;    //存放子方法之名稱
-                ArrayList<Integer> methodFirstLineList =csop.methodFirstLineList; //第一次出現的行數
+               ArrayList<String>  methodNameSub= csop.methodList;    //存放子方法之名稱
+               ArrayList<Integer> methodFirstLineList =csop.methodFirstLineList; //第一次出現的行數
                 ArrayList<Integer> methodNumList = csop.methodNumList;
-		    	//System.out.println("ClassName:"+fileName+",fileLine: "+fileLine);
+		    	System.out.println("ClassName:"+fileName+",fileLine: "+fileLine);
 		    		int line = 0;//用以計算行數
 		    		boolean flags = true;
 		    		
@@ -163,7 +163,8 @@ public class CyclomaticComplexity {
 			                	 	methodList.add(cCount);
 			                	 	methodObj.add(cObject);
 			                	 	methodEndLineList.add(line);
-			                	 	//System.out.println("---------addCount:"+cCount);
+			                	 	System.out.println("---------addendlines:"+line);
+			                	 	System.out.println("---------addCount:"+cCount);
 			                	 	//初始化數值
 			                	 	ttempCount=0;
 			                	 	tempCount = 0;
@@ -193,7 +194,7 @@ public class CyclomaticComplexity {
                         	 int objt=methodObj.get(y);
                         	 Double csubt=countSubMethodList.get(y);
                         	 double  linest=methodEndLineList.get(y);
-                        	 double flinet=methodFirstLineList.get(y);
+                        	double flinet=methodFirstLineList.get(y);
                         	 int mnumt =methodNumList.get(y);
                         	 
                         	 methodNameAll.add(namet);

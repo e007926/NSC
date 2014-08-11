@@ -46,9 +46,7 @@ class Countcfp {
         make_list();
         
         System.out.println("make_list finished.");
-       /*for(int a=0;a<methodList.size();a++){
-    	   System.out.println("methodname:"+methodList.get(a));
-       }*/
+       
         // Calculate the specific variable corresponding to the given method.
         CyclomaticComplexity cc = new CyclomaticComplexity();
         
@@ -76,70 +74,7 @@ class Countcfp {
         	
         }
         //System.out.println();
-       /* for(int a=0;a<methodList.size();a++){
-        	System.out.println("methodName:"+methodList.get(a));
-        }*/
-        
-        /*for(int i=0,len=methodList.size();i<len;i++){
-        	String methodName=methodList.get(i);
-        	
-            // The initialization.
-            this.cfp = 0;
-            this.hComplexityCfp = 0;
-            this.hMethodCfp = 0;
-            this.hClassCfp = 0;
-            this.callmethodLines = 0;
-            findmethod = true;
-            continuefind=true;
-            int count = 0;
-            HashSet hs = new HashSet();
-            
-            
-            count_cfp(methodFirstLineList.get(methodList.indexOf(methodName)), methodName, hs);
-            
-            // Fill the specific variables corresponding to the given method.
-            
-            int index = methodList.indexOf(methodName);
-            System.out.println(methodName+" "+ index);
-            
-            
-            
-            if(!continuefind){
-            	index--;
-            this.partmethodCallLineList.set(index, this.callmethodLines);
-            this.cfp /= methodNumList.get(index);
-            this.hComplexityCfp /= methodNumList.get(index);
-            this.hMethodCfp /= methodNumList.get(index);
-            this.hClassCfp /= methodNumList.get(index);
-            this.methodCfpList.set(index, this.cfp);
-            this.methodHComplexityCfpList.set(index, this.hComplexityCfp);
-            this.methodHMethodCfpList.set(index, this.hMethodCfp);
-            this.methodHClassCfpList.set(index, this.hClassCfp);
-            //if(findmethod){
-            this.indexAll++;
-            //}
-            System.out.println( methodName + "  call method lines:"+this.callmethodLines);
-            System.out.println( methodName + " : count_cfp finished." );
-            }
-            else{
-            	System.out.println("continuefind = true");
-            	this.partmethodCallLineList.set(index, this.callmethodLines);
-                this.cfp /= methodNumList.get(index);
-                this.hComplexityCfp /= methodNumList.get(index);
-                this.hMethodCfp /= methodNumList.get(index);
-                this.hClassCfp /= methodNumList.get(index);
-                this.methodCfpList.set(index, this.cfp);
-                this.methodHComplexityCfpList.set(index, this.hComplexityCfp);
-                this.methodHMethodCfpList.set(index, this.hMethodCfp);
-                this.methodHClassCfpList.set(index, this.hClassCfp);
-                //if(findmethod){
-                this.indexAll++;
-                //}
-                System.out.println( methodName + "  call method lines:"+this.callmethodLines);
-                System.out.println( methodName + " : count_cfp finished." );
-            }
-            
-        }*/
+       
         for(String methodName : methodList){
             // The initialization.
             this.cfp = 0;
@@ -181,9 +116,7 @@ class Countcfp {
             
             
         }
-        /*for(int a=0;a<partmethodCallLineList.size();a++){
-        	System.out.println("partmethodLineList:"+partmethodCallLineList.get(a));
-        }*/
+     
         System.out.println("start_count finished.");
     }
     double total_lines() {
@@ -521,12 +454,10 @@ class Countcfp {
                         strData = inputFile.readLine();
                         i++;
                     }
-                    for (String n : submethods) {
+                   /* for (String n : submethods) {
                     	System.out.println("submethod:"+n);
-                    }
-                   /* for(String y:methodList){
-                    	System.out.println("methodList:"+y);
                     }*/
+                  
                     
                     //對其下所有子方法逐一做遞迴操作
                     
@@ -566,10 +497,7 @@ class Countcfp {
 	                        	}
 		                           
 	                        
-	                        /*else {
-	                        	System.out.println(n+" is in the methodlist");
-	                        	
-	                        }	*/									
+	                       								
                         }
                     }
                     if (methodNumList.get(methodList.indexOf(m)) == 1) {
